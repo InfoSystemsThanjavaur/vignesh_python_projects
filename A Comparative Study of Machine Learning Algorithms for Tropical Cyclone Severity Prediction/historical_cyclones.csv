@@ -1,0 +1,13 @@
+City         , Year, CycloneName    , Severity                       , WindSpeed_kmh
+Chennai      , 2020, Nivar          , Very Severe Cyclonic Storm     , 130
+Chennai      , 2018, Gaja           , Very Severe Cyclonic Storm     , 120
+Chennai      , 2016, Vardah         , Very Severe Cyclonic Storm     , 130
+Mumbai       , 2020, Nisarga        , Severe Cyclonic Storm          , 110
+Kolkata      , 2021, Yaas           , Very Severe Cyclonic Storm     , 140
+Kolkata      , 2020, Amphan         , Super Cyclonic Storm           , 240
+Visakhapatnam, 2019, Fani           , Extremely Severe Cyclonic Storm, 215
+Visakhapatnam, 2014, Hudhud         , Very Severe Cyclonic Storm     , 185
+Puducherry   , 2011, Thane          , Very Severe Cyclonic Storm     , 135
+Nagapattinam , 2018, Gaja           , Very Severe Cyclonic Storm     , 120
+Cuddalore    , 2011, Thane          , Very Severe Cyclonic Storm     , 135
+Surat        , 1998, Gujarat cyclone, Super Cyclonic Storm           , 190
