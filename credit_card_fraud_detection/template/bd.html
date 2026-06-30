@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details</title>
+</head>
+<body>
+    <h1>Customer Details</h1>
+         
+    <div class="table-container">
+        <form method="get">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Phone Number</th>
+                    <th>E-Mail</th>
+                    <th>Account Type</th>
+                    <th>Account Number</th>
+                    <th>IFSC Code</th>
+                    <th>Current Balance</th>
+                </tr>
+                {% for i in result %}
+                <tr>
+                    {% for j in i %}
+                    <td data-label="{{ j }}">{{ j }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </div>
+    <div class="button-container">
+        <button><a href="admin.html">Back</a></button> 
+    </div>
+    
+</body>
+
+<style>
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #e66465, #9198e5);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table container styling */
+.table-container {
+    width: 90%;
+    max-width: 1200px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 13px 13px 8px rgba(0, 0, 0, 0.5);
+    overflow-x: auto;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect */
+tr:hover {
+    background-color: #e9f7ef;
+}
+
+button {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            padding: 10px 20px; /* Add some padding */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 16px; /* Font size */
+            transition: background-color 0.3s; /* Smooth hover effect */
+            text-decoration: none; /* Remove underline from link */
+        }
+
+        /* Style for the link inside the button */
+        button a {
+            color: white; /* White text */
+            text-decoration: none; /* No underline */
+        }
+
+        /* Hover effect for button */
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        /* Center align button if needed */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .back-button {
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .back-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Responsive table styles */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 15px;
+    }
+
+    table, th, td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    table, th, td {
+        display: block;
+        width: 100%;
+        font-size: 13px;
+    }
+
+    th {
+        display: none;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+    /* Display column name before each data item */
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #4CAF50;
+        width: 50%;
+        display: inline-block;
+    }
+
+    .table-container {
+        padding: 10px;
+    }
+
+    .back-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+</style>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Details</title>
+
+
+
+    <style>
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Body styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e66465, #9198e5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+/* Account input container styling */
+.account-container {
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.account-container h1 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.account-container label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.account-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* View and Download Button Styling */
+/* Button Styling */
+button, .view-button, .download-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover and Focus Effects */
+button:hover, .view-button:hover, .download-button:hover {
+    background-color: #45a049;
+    transform: scale(1.03);
+}
+
+button:active, .view-button:active, .download-button:active {
+    transform: scale(0.98);
+    background-color: #388e3c;
+}
+
+/* Focus Styling for Accessibility */
+button:focus, .view-button:focus, .download-button:focus {
+    outline: 3px solid rgba(76, 175, 80, 0.6);
+    outline-offset: 2px;
+}
+
+/* Button Responsive Adjustments */
+@media (max-width: 768px) {
+    button, .view-button, .download-button {
+        padding: 10px 18px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    button, .view-button, .download-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Transaction table styling */
+table {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+td {
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternating row colors */
+tr:nth-child(even) {
+    background-color: #f3f6fa;
+}
+
+/* Hover effect for rows */
+tr:hover {
+    background-color: #e2f0e4;
+}
+
+/* Message for no transactions */
+h1 {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .account-container, .transaction-container {
+        width: 90%;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    .view-button, .download-button {
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .view-button, .download-button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+/* Adjustments for very small screens */
+@media (max-width: 480px) {
+    .account-container, .transaction-container {
+        width: 95%;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
+
+    </style>
+
+</head>
+<body>
+
+
+    {% if result != 0 %}
+        <table>
+            <tr>
+            
+            <th>From Account Number </th>
+            <th>To Account Number </th>
+            <th>Amount </th>
+            <th>Date </th>
+            
+            
+            {% for data in result %}
+            <tr>
+                {% for i in data %}
+                <td>{{i}}</td>
+
+                {% endfor %}
+            
+            {% endfor %}
+
+    {% else %}
+        <h1> No Transactions Found </h1>
+    {% endif %}
+    </table>
+    <a href="{% url 'download' %}" download><button>download</button></a>
+</body>
+</html>

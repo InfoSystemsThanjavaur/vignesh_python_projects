@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Fraud Prediction</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e66465, #9198e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+            text-align: left;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        input[type="datetime-local"],
+        select,
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="datetime-local"]:focus,
+        select:focus {
+            border-color: #00796b;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #00796b;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #00564d;
+        }
+
+   
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #00796b;
+            background-color: #e0f2f1;
+            color: #004d40;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .result-box i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: #00796b;
+        }
+
+        .result-box.fraud {
+            background-color: #f8d7da; 
+            border-color: #f5c6cb;
+            color: #721c24; 
+        }
+        
+        .result-box.not-fraud {
+            background-color: #d4edda; 
+            border-color: #c3e6cb;
+            color: #155724; 
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            label {
+                font-size: 0.9rem;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="datetime-local"],
+            select,
+            input[type="submit"] {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            label {
+                font-size: 0.85rem;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="datetime-local"],
+            select,
+            input[type="submit"] {
+                font-size: 0.85rem;
+                padding: 8px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Checking Credit Card Fraud</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            <label>User Id</label>
+            <input type="text" name="id" required>
+        
+            <label>Transaction Amount</label>
+            <input type="text" name="amt" required>
+        
+            <label>CVV No</label>
+            <input type="number" name="cvv" required>
+        
+            <label>Your Location</label>
+            <input type="text" name="location" required>
+        
+            <label>Transaction Date & Time</label>
+            <input type="datetime-local" name="time" required>
+        
+            <label>Is declined (yes/no)</label>
+            <input type="text" name="decline" required>
+        
+            <label>Total Number of Decline</label>
+            <input type="text" name="no_decline" required>
+        
+            <label>Is Foreign Transaction (yes/no)</label>
+            <input type="text" name="ft" required>
+        
+            <label for="employment-status">Transaction Type</label>
+            <select id="employment-status" name="employment_status" required>
+                <option value="">Select</option>
+                <option value="Chip_Transaction">Chip Transaction</option>
+                <option value="Card Transaction">Card Transaction</option>
+                <option value="Swipe Transaction">Swipe Transaction</option>
+            </select>
+        
+            <input type="submit" value="Submit">
+        </form>
+        
+        <!-- Debugging Script -->
+        <script>
+            console.log("Result received:", "{{ result }}");
+        </script>
+        
+        {% if result is not None and result != "" %}
+            {% if result == "Fraud" %}
+                <script>
+                    Swal.fire({
+                        title: " Fraudulent Transaction",
+                        text: "{{ result }}",
+                        icon: "error",
+                        confirmButtonColor: "#d33",
+                        background: "#f8d7da",
+                        color: "#721c24",
+                    });
+                </script>
+            {% else %}
+                <script>
+                    Swal.fire({
+                        title: "Safe Transaction",
+                        text: "{{ result }}",
+                        icon: "success",
+                        confirmButtonColor: "#28a745",
+                        background: "#d4edda",
+                        color: "#155724",
+                    });
+                </script>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

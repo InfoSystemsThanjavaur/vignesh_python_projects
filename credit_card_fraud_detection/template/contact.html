@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <style>
+   
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: rgb(2,0,36);
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('static/contact.jpg') no-repeat center center/cover;
+     display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    position: fixed; /* Fixes the nav at the top */
+    top: 0; /* Aligns it to the top of the page */
+    left: 0;
+    width: 100%; /* Makes the navigation full width */
+    background-color: rgba(0, 121, 107, 0.95); /* Slightly transparent background */
+    padding: 15px 0;
+    z-index: 1000; /* Ensures it stays above other elements */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Adds a drop shadow */
+    backdrop-filter: blur(5px); /* Adds a blur effect for modern look */
+}
+nav .logo{
+    color: white;
+    padding :0 100px;
+    font-size: 35px;
+    line-height: 45px;
+    font-weight: bold;
+}
+
+/* Link Styles */
+a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 30px;
+    background-color: #00796b;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+a:hover {
+    background-color: #004d40;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
+
+a:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+nav .nav-tit{
+    margin-left: 50px;
+    background-color: #004d40;
+
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column; /* Stack the links vertically on small screens */
+        padding: 10px 0;
+    }
+
+    a {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+    .contact-container {
+      display: flex;
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 13px 13px 8px rgba(0, 0, 0, 0.5);
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .contact-container .contact-info {
+      flex: 1;
+      padding-right: 20px;
+    }
+
+    .contact-container .contact-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .contact-container .contact-info p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .contact-container .contact-info div {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .contact-container .contact-info div i {
+      font-size: 1.2rem;
+      color: #ff6600;
+      margin-right: 10px;
+    }
+
+    .contact-form {
+      flex: 1.5;
+    }
+
+    .contact-form h2 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .contact-form h2 span {
+      color: #ff6600;
+    }
+
+    .contact-form p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .contact-form button {
+      padding: 12px;
+      background-color: #ff6600;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .contact-form button:hover {
+      background-color: #3ea511;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <label class="logo">Contact Us</label>
+
+    <div>
+      <a href="home.html" aria-label="User Section"><i class="fas fa-user"></i> Home</a>
+      <a href="user.html" aria-label="User Section"><i class="fas fa-user"></i> User</a>
+      <a href="adlogin.html" aria-label="Admin Section"><i class="fas fa-user-shield"></i> Admin</a>
+      <a href="contact.html" aria-label="Contact Us"><i class="fas fa-envelope"></i> Contact Us</a>
+  </div>
+</nav>
+  <div class="contact-container">
+    <!-- Contact Info Section -->
+    <div class="contact-info">
+      <h3>Contact detail</h3>
+      <p>We’re here to help! Whether you have questions about our banking services, need assistance with your account, or want to learn more about our financial solutions, please feel free to reach out.</p>
+      <div><i class="fas fa-phone-alt"></i>+12457836913, +12457836913</div>
+      <div><i class="fas fa-envelope"></i> dvb123@gmail.com</div>
+      <div><i class="fas fa-map-marker-alt"></i>23,North Main Street,Thanjavur-613009</div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="contact-form">
+      <h2>Contact <span>Us</span></h2>
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="a55c38c8-22ac-4492-b177-619291f27f72">
+        <div style="display: flex; gap: 10px;">
+          <input type="text" name="name" placeholder="Name" required style="flex: 1;">
+          <input type="email" name="email" placeholder="Email" required style="flex: 1;">
+        </div>
+        <input type="text" name="subject" placeholder="Subject" required>
+        <textarea name="message" placeholder="Message" rows="5" required></textarea>
+        <button type="submit">Send Now!</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+

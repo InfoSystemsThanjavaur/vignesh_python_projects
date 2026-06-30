@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-box">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-box">
+                <label>Username</label>
+                <input type="text" name="un" required>
+            </div>
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" name="pwd" required>
+            </div>
+            <div class="options">
+                <a href="#">Forgot password ?</a>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+            <div class="signup">
+                <p>Don't have an account ? <a href="adreg.html">Signup</a></p>
+                <a href="#">Need help ?</a>
+            </div>
+        </form>
+    </div>
+</body>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #e66465, #9198e5);
+    padding: 10px;
+    animation: backgroundAnimation 10s ease-in-out infinite;
+}
+
+
+
+.login-box {
+    width: 100%;
+    max-width: 320px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 13px 13px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: fadeIn 1.5s ease-in;
+}
+
+
+
+.login-box h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.login-box h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 2px;
+    background-color: #6c63ff;
+    margin: 10px auto 0;
+}
+
+.input-box {
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+}
+
+/* Input Focus Animation */
+.input-box input:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+    animation: inputFocus 0.5s ease;
+}
+
+/* Input Focus Keyframes */
+@keyframes inputFocus {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.input-box label {
+    font-size: 14px;
+    color: #333;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.options {
+    text-align: right;
+    margin-top: -10px;
+}
+
+.options a {
+    color: #6c63ff;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.options a:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, #6c63ff, #b892ff);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    animation: buttonPulse 1.5s infinite alternate;
+}
+
+/* Button Hover and Animation */
+.login-button:hover {
+    background: linear-gradient(135deg, #5a52d4, #a57fdd);
+    transform: scale(1.05);
+}
+
+/* Button Pulse Animation */
+@keyframes buttonPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); }
+}
+
+.signup {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
+}
+
+.signup a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+.signup a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-box {
+        padding: 30px;
+    }
+
+    .login-box h2 {
+        font-size: 22px;
+    }
+
+    .input-box label {
+        font-size: 13px;
+    }
+
+    .input-box input {
+        padding: 8px;
+    }
+
+    .login-button {
+        font-size: 15px;
+    }
+
+    .options a, .signup {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 20px;
+    }
+
+    .login-box h2 {
+        font-size: 20px;
+    }
+
+    .input-box label {
+        font-size: 12px;
+    }
+
+    .input-box input {
+        padding: 8px;
+    }
+
+    .login-button {
+        font-size: 14px;
+    }
+
+    .options a, .signup {
+        font-size: 10px;
+    }
+}
+
+</style>
+</html>

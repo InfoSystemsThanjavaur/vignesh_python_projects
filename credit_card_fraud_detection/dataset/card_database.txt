@@ -1,0 +1,57 @@
+CREATE TABLE `transactionsdetails` (
+	`FromAccountNumber` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`ToAccountNumber` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`TransferPayment` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`Date` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci'
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `reg` (
+	`name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`address` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`city` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`branch` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`zip` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`un` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`pwd` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`phno` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`mail` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`acctype` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`accno` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`ifsc` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`amount` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci'
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `card` (
+	`name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`mail` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`phone` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`dob` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`income` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`job` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`address` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`status` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci'
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `adreg` (
+	`un` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`email` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`pwd` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci'
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+
+

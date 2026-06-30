@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - DVBanking System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('static/admin.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 50px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+        /* Background Effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,121,107,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        /* Header Style */
+        h1 {
+            color: #333;
+            text-align: center;
+            align-items: center;
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+            margin-bottom: 50px;
+            letter-spacing: 1.5px;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        /* Navigation Styles */
+/* Navigation Styles */
+nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    position: fixed; /* Fixes the nav at the top */
+    top: 0; /* Aligns it to the top of the page */
+    left: 0;
+    width: 100%; /* Makes the navigation full width */
+    background-color: rgba(0, 121, 107, 0.95); /* Slightly transparent background */
+    padding: 15px 0;
+    z-index: 1000; /* Ensures it stays above other elements */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Adds a drop shadow */
+    backdrop-filter: blur(5px); /* Adds a blur effect for modern look */
+}
+nav .logo{
+    color: white;
+    padding :0 100px;
+    font-size: 35px;
+    line-height: 45px;
+    font-weight: bold;
+}
+
+/* Link Styles */
+a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 30px;
+    background-color: #00796b;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+a:hover {
+    background-color: #004d40;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
+
+a:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+nav .nav-tit{
+    margin-left: 50px;
+    background-color: #004d40;
+
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column; /* Stack the links vertically on small screens */
+        padding: 10px 0;
+    }
+
+    a {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+        /* Animation Effects */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+                margin-bottom: 40px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            a {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    
+    <nav>
+        <label class="logo">Welcome Admin</label>
+
+        <div>
+            <a href="bd.html">
+                <i class="fas fa-info-circle"></i> Details
+            </a>
+            <a href="remove.html">
+                <i class="fas fa-trash-alt"></i> Remove
+            </a>
+            <a href="home.html">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </nav>
+    {% endblock content %}
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amount Transfer</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+
+    <style>
+        /* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Background styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e66465, #9198e5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 50px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+
+        /* Background Effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,121,107,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+/* Container for the form */
+.transfer-container {
+    width: 400px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 13px 13px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.transfer-container h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.transfer-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+    text-align: left;
+}
+
+.transfer-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.transfer-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.transfer-button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .transfer-container {
+        width: 90%;
+    }
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="transfer-container">
+        <h1>Amount Transfer</h1>
+        <form class="transfer-form"  method="post">
+            {% csrf_token %}
+            <label for="from-account">From Account:</label>
+            <input type="text" id="from-account" name="from-account" placeholder="Enter your account number" required>
+            
+            <label for="to-account">To Account:</label>
+            <input type="text" id="to-account" name="to-account" placeholder="Enter recipient account number" required>
+            
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" placeholder="Enter amount to transfer" required>
+            
+            <button type="submit" class="transfer-button">Transfer</button>
+        </form>
+    </div>
+
+
+
+    {% if result == -1 %}
+        <script>alert('Insufficent Payment')</script>
+    {% endif %}
+    
+    {% if result == 1 %}
+        <script>alert('Success')</script>
+    {% endif %}
+    
+    {% if result == 0 %}
+        <script>alert('Failure')</script>
+    {% endif %}
+
+    
+    {% if result == 404 %}
+        <script>alert('Invalied Account Number ')</script>
+    {% endif %}
+</body>
+
+
+</html>

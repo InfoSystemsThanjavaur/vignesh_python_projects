@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+</head>
+<body>
+    <h1>User Details</h1>
+    <form  method="get">
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Branch</th>
+                <th>Zip</th>
+                <th>User Name</th>
+                <th>Phone Number</th>
+                <th>E-Mail</th>
+                <th>Account Type</th>
+                <th>Account Number</th>
+                <th>IFSC Code</th>
+                <th>Current Balance</th>
+            </tr>
+        {% for i in  result %}
+        <tr>
+            {% for j in  i %}
+            <td>{{j}}</td> 
+            {% endfor  %}   
+        {% endfor  %}   
+        
+    </form>
+    
+</table>
+</body>
+<style>
+   /* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Body styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e66465, #9198e5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+/* Heading styling */
+h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+/* Table container styling */
+.table-container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 500px;
+    box-shadow: 13px 13px 8px rgba(0, 0, 0, 0.5);
+    overflow-x: auto; /* Enable horizontal scroll on small screens */
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 500px;
+    margin-top: 20px;
+    box-shadow: 13px 13px 8px rgba(0, 0, 0, 0.5);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect for table rows */
+tr:hover {
+    background-color: #e9f7ef;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 15px;
+    }
+
+    table, th, td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Stack table rows for very small screens */
+    table, tr, th, td {
+        display: block;
+        width: 100%;
+    }
+
+    th {
+        display: none; /* Hide headers on mobile */
+    }
+
+    tr {
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        font-size: 14px;
+    }
+
+    /* Label for each cell in small screens */
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #4CAF50;
+        width: 50%;
+        display: inline-block;
+    }
+}
+
+</style>
+</html>
