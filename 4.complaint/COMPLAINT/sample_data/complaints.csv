@@ -1,0 +1,6 @@
+complaint_text                    , category           , priority
+"Street light not working"        , "Electricity Issue", "High"
+"Garbage not collected for 3 days", "Garbage Issue"    , "Medium"
+"Road full of potholes"           , "Road Issue"       , "High"
+"Water leakage near my house"     , "Water Issue"      , "High"
+"Noise disturbance at night"      , "Public Safety"    , "Low"
