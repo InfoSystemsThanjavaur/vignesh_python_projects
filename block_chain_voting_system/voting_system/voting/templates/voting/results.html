@@ -1,0 +1,175 @@
+{% extends "voting/base.html" %}
+
+{% block content %}
+<div class="py-5 animate__animated animate__fadeIn">
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-7">
+            <h2 class="fw-bold text-dark">Election <span class="text-primary">Analytics</span></h2>
+            <p class="text-muted">Real-time voting statistics powered by decentralized ledger technology.</p>
+        </div>
+        <div class="col-md-5 text-end">
+            {% if is_valid %}
+                <div class="badge bg-soft-success text-success p-3 rounded-pill animate__animated animate__pulse animate__infinite">
+                    🛡️ System Integrity: SECURE
+                </div>
+            {% else %}
+                <div class="badge bg-soft-danger text-danger p-3 rounded-pill animate__animated animate__flash animate__infinite">
+                    ⚠️ System Integrity: COMPROMISED
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if not is_valid %}
+    <div class="alert alert-danger bento-card border-0 shadow-lg mb-4 p-4 animate__animated animate__shakeX">
+        <div class="d-flex align-items-center">
+            <div class="icon-box bg-danger text-white me-3">🚨</div>
+            <div>
+                <h4 class="alert-heading fw-bold mb-1">SECURITY BREACH DETECTED!</h4>
+                <p class="mb-0">The Blockchain validation failed. Unauthorized data modification has been identified at <b>Block #{{ tampered_id }}</b>.</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="card h-100 border-0 shadow-sm bento-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0">Live Vote Distribution</h5>
+                    <span class="small text-muted">Verified Counts</span>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="voteChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card h-100 border-0 shadow-sm bento-card p-4 bg-primary text-white">
+                <h5 class="fw-bold mb-3">Audit Operations</h5>
+                <p class="small opacity-75 mb-4">Export the cryptographically verified election results into a formal PDF report for institutional audit.</p>
+                <a href="{% url 'download_report' %}" class="btn btn-light btn-lg w-100 rounded-pill shadow-sm transition-up fw-bold">
+                    📄 Download Audit Report
+                </a>
+                <div class="mt-auto pt-4 border-top border-white border-opacity-25">
+                    <div class="d-flex justify-content-between small">
+                        <span>Ledger Status:</span>
+                        <span class="fw-bold">{% if is_valid %}Active & Validated{% else %}Error Detected{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card border-0 shadow-sm bento-card p-4">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-box bg-dark text-white me-3" style="width:40px; height:40px;">⛓️</div>
+                    <h5 class="fw-bold mb-0">Blockchain Public Ledger (Audit Trail)</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle custom-table">
+                        <thead>
+                            <tr>
+                                <th class="text-secondary small">BLOCK ID</th>
+                                <th class="text-secondary small">VOTER IDENTITY</th>
+                                <th class="text-secondary small">CRYPTOGRAPHIC HASH</th>
+                                <th class="text-secondary small">VERIFICATION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for block in blockchain %}
+                            <tr>
+                                <td class="fw-bold text-primary">#{{ block.id }}</td>
+                                <td>
+                                    <span class="badge bg-light text-dark rounded-pill px-3">
+                                        User_ID_{{ block.voter_id|add:"100" }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <code class="text-muted small text-truncate d-block" style="max-width: 250px;">
+                                        {{ block.block_hash }}
+                                    </code>
+                                </td>
+                                <td>
+                                    {% if is_valid %}
+                                        <span class="text-success small fw-bold">● VERIFIED</span>
+                                    {% else %}
+                                        <span class="text-danger small fw-bold">● INVALID</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center py-5 text-muted">No votes have been recorded in the ledger yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bento-card { border-radius: 24px; }
+    .bg-soft-success { background-color: rgba(25, 135, 84, 0.1); }
+    .bg-soft-danger { background-color: rgba(220, 53, 69, 0.1); }
+    .icon-box {
+        width: 50px; height: 50px;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 12px; font-size: 1.2rem;
+    }
+    .custom-table thead th { border-top: none; padding-bottom: 20px; }
+    .custom-table tbody td { padding: 15px 0; border-bottom: 1px solid #f1f1f1; }
+    .transition-up:hover { transform: translateY(-3px); }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('voteChart').getContext('2d');
+        
+        // Data Check for Debugging
+        const labels = [{% for item in chart_data %}"{{ item.name }}",{% endfor %}];
+        const counts = [{% for item in chart_data %}{{ item.count }},{% endfor %}];
+        
+        console.log("Labels:", labels);
+        console.log("Counts:", counts);
+
+        if (labels.length === 0) {
+            console.warn("No chart data available!");
+            return;
+        }
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Verified Votes',
+                    data: counts,
+                    backgroundColor: 'rgba(13, 110, 253, 0.8)',
+                    borderRadius: 10,
+                    barThickness: 30
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 },
+                        grid: { display: false } 
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

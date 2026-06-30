@@ -1,0 +1,121 @@
+{% extends "voting/base.html" %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeIn">
+    <div class="text-center mb-5 animate__animated animate__fadeInDown">
+        <div class="badge bg-soft-primary text-primary px-3 py-2 mb-3 rounded-pill fw-bold">
+            🔒 Secure Cryptographic Session Active
+        </div>
+        <h2 class="display-5 fw-bold text-dark">Secure Digital <span class="text-primary">Ballot</span></h2>
+        <p class="text-muted">Authenticated Voter: <span class="fw-bold text-dark">{{ request.user.username }}</span></p>
+    </div>
+
+    <form method="POST" action="{% url 'vote' %}">
+        {% csrf_token %}
+        <div class="row g-4 justify-content-center">
+            {% for candidate in candidates %}
+            <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
+                <div class="card h-100 text-center border-0 shadow-sm p-4 voter-card glass-effect">
+                    
+                    <div class="mb-4">
+                        <div class="logo-container mx-auto">
+                            {% if candidate.party_logo %}
+                                <img src="{{ candidate.party_logo.url }}" class="img-fluid" alt="{{ candidate.party }}">
+                            {% else %}
+                                <div class="no-logo-placeholder">
+                                    <span class="text-muted small">No Symbol</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="card-body p-0">
+                        <h3 class="fw-bold mb-1 text-dark">{{ candidate.name }}</h3>
+                        <div class="badge bg-light text-primary mb-4 px-3 py-2 rounded-pill">
+                            {{ candidate.party }}
+                        </div>
+
+                        <input type="radio" class="btn-check" name="candidate" id="can_{{ candidate.id }}" value="{{ candidate.id }}" required>
+                        <label class="btn btn-outline-primary w-100 py-3 rounded-pill fw-bold ballot-btn" for="can_{{ candidate.id }}">
+                            <span class="unselected-text">Select Candidate</span>
+                            <span class="selected-text d-none">✓ Selected for Vote</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-5 pt-3 animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
+            <button type="submit" class="btn btn-success btn-lg px-5 py-3 rounded-pill shadow-lg fw-bold transition-up">
+                Submit My Encrypted Vote 🗳️
+            </button>
+            <p class="text-muted small mt-3">Once submitted, this transaction will be permanently recorded on the blockchain ledger.</p>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
+
+<style>
+    /* Glassmorphism & Bento Styling */
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 24px !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    }
+
+    .voter-card {
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .voter-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
+    }
+
+    /* Logo Styling */
+    .logo-container {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        border-radius: 20px;
+        padding: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .voter-card:hover .logo-container {
+        transform: scale(1.1);
+    }
+
+    .no-logo-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Selection Logic Styling */
+    .btn-check:checked + .btn-outline-primary {
+        background-color: #0d6efd;
+        color: white;
+        border-color: #0d6efd;
+        box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+    }
+
+    .btn-check:checked + .btn-outline-primary .unselected-text { display: none; }
+    .btn-check:checked + .btn-outline-primary .selected-text { display: inline; }
+
+    .bg-soft-primary { background-color: rgba(13, 110, 253, 0.1); }
+    .transition-up:hover { transform: translateY(-3px); }
+    
+    .ballot-btn {
+        border-width: 2px;
+        transition: all 0.3s ease;
+    }
+</style>

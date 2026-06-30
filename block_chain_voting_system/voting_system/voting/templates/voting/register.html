@@ -1,0 +1,100 @@
+{% extends "voting/base.html" %}
+{% block content %}
+<div class="row justify-content-center align-items-center min-vh-75 animate__animated animate__fadeIn">
+    <div class="col-md-6 col-lg-5">
+        <div class="text-center mb-4 animate__animated animate__bounceInDown">
+            <div class="icon-badge bg-primary shadow-lg mx-auto mb-3">
+                <span style="font-size: 2rem;">📝</span>
+            </div>
+            <h2 class="fw-bold text-dark">Voter Registration</h2>
+            <p class="text-muted small">Join the decentralized network to cast your secure vote.</p>
+        </div>
+
+        <div class="card border-0 shadow-lg p-4 bento-card glass-effect">
+            <form method="POST" id="registrationForm">
+                {% csrf_token %}
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} py-2 small border-0">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label fw-bold small text-secondary">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0">👤</span>
+                            <input type="text" name="username" class="form-control custom-input" placeholder="Choose a unique username" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label fw-bold small text-secondary">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0">📧</span>
+                            <input type="email" name="email" class="form-control custom-input" placeholder="name@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label fw-bold small text-secondary">Date of Birth (Eligibility Check)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0">📅</span>
+                            <input type="date" name="dob" id="dob" class="form-control custom-input" required>
+                        </div>
+                        <div id="ageWarning" class="alert alert-soft-danger py-2 mt-2 d-none animate__animated animate__shakeX">
+                            <small>⚠️ <b>Ineligible:</b> You must be 18+ years old to register.</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mb-4">
+                        <label class="form-label fw-bold small text-secondary">Secure Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0">🔑</span>
+                            <input type="password" name="password" class="form-control custom-input" placeholder="Create a strong password" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" id="regBtn" class="btn btn-primary btn-lg rounded-pill shadow transition-up fw-bold">
+                        Register as Voter
+                    </button>
+                </div>
+            </form>
+
+            <div class="text-center mt-4">
+                <p class="text-muted small mb-0">
+                    Already part of the network? <a href="{% url 'login' %}" class="text-primary fw-bold text-decoration-none">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('dob').addEventListener('change', function() {
+        const dob = new Date(this.value);
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) { age--; }
+
+        const warning = document.getElementById('ageWarning');
+        const btn = document.getElementById('regBtn');
+
+        if (age < 18) {
+            warning.classList.remove('d-none');
+            btn.classList.replace('btn-primary', 'btn-secondary');
+            btn.disabled = true;
+        } else {
+            warning.classList.add('d-none');
+            btn.classList.replace('btn-secondary', 'btn-primary');
+            btn.disabled = false;
+        }
+    });
+</script>
+{% endblock %}

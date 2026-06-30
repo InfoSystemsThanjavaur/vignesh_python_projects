@@ -1,0 +1,132 @@
+{% extends "voting/base.html" %}
+{% block content %}
+<div class="row align-items-center py-5 min-vh-75">
+    <div class="col-lg-6 animate__animated animate__fadeInLeft">
+        <div class="badge bg-soft-primary text-primary px-3 py-2 mb-3 rounded-pill fw-bold">
+            Powered by SHA-256 Cryptography
+        </div>
+        <h1 class="display-3 fw-bold text-dark mb-4" style="line-height: 1.1;">
+            The Future of <br><span class="text-gradient">Secure Voting</span> <br>is Decentralized.
+        </h1>
+        <p class="lead text-secondary mb-4 pb-2" style="font-size: 1.25rem;">
+            Experience a new era of democracy. Our blockchain-driven platform eliminates fraud, 
+            ensures total transparency, and guarantees that your vote remains untampered for eternity.
+        </p>
+        <div class="d-flex gap-3">
+            {% if not user.is_authenticated %}
+                <a href="{% url 'register' %}" class="btn btn-primary btn-lg px-5 rounded-pill shadow-lg transition-up">Get Started</a>
+            {% else %}
+                <a href="{% url 'vote' %}" class="btn btn-primary btn-lg px-5 rounded-pill shadow-lg transition-up">Go to Ballot</a>
+            {% endif %}
+            <a href="{% url 'about' %}" class="btn btn-white btn-lg px-5 rounded-pill shadow-sm border transition-up">View Roadmap</a>
+        </div>
+    </div>
+    <div class="col-lg-6 text-center animate__animated animate__zoomIn d-none d-lg-block">
+        <div class="position-relative">
+            <div class="blob-bg"></div>
+            <img src="https://cdn-icons-png.flaticon.com/512/5065/5065034.png" alt="Blockchain Network" class="img-fluid floating-img" style="max-width: 75%; position: relative; z-index: 2;">
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 pt-5 g-4">
+    <div class="col-md-12 text-center mb-4">
+        <h2 class="fw-bold">Revolutionizing the Electoral Process</h2>
+        <p class="text-muted">Built on three core pillars of modern cryptographic science.</p>
+    </div>
+    
+    <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+        <div class="card p-4 border-0 shadow-sm h-100 bento-card">
+            <div class="icon-circle bg-primary text-white mb-4">🔒</div>
+            <h4 class="fw-bold">Immutable Ledger</h4>
+            <p class="text-muted small">
+                In our system, every vote is converted into a cryptographic block linked to its predecessor. 
+                Because each block contains the hash of the previous one, changing a single entry would require 
+                re-calculating the entire chain. This makes your vote mathematically permanent and protected 
+                against any form of retroactive manipulation.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+        <div class="card p-4 border-0 shadow-sm h-100 bento-card">
+            <div class="icon-circle bg-info text-white mb-4">🛡️</div>
+            <h4 class="fw-bold">Decentralized Trust</h4>
+            <p class="text-muted small">
+                Traditional voting relies on a central authority that can be a single point of failure. 
+                Our platform distributes trust across a decentralized network. By removing the "middleman," 
+                we ensure that the results are governed by code and mathematics rather than human intervention, 
+                drastically reducing the risk of institutional bias or corruption.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+        <div class="card p-4 border-0 shadow-sm h-100 bento-card">
+            <div class="icon-circle bg-success text-white mb-4">👁️</div>
+            <h4 class="fw-bold">Public Verifiability</h4>
+            <p class="text-muted small">
+                Transparency is the bedrock of democracy. Our Audit Trail allows anyone to verify that the 
+                election results match the recorded blocks without compromising individual voter privacy. 
+                The system provides a real-time integrity check, ensuring that the total count is always 
+                synced with the verified blockchain ledger.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row my-5 py-5 align-items-center">
+    <div class="col-md-5">
+        <h2 class="fw-bold mb-4">Smart Contract Governance</h2>
+        <p class="text-secondary">
+            Our platform isn't just a database; it's an intelligent ecosystem. We utilize Smart Contract logic 
+            to automate the enforcement of election rules, such as voter eligibility (18+), single-vote 
+            constraints per identity, and strict time-bound election windows.
+        </p>
+        <ul class="list-unstyled">
+            <li class="mb-3">✅ <b>Automated Eligibility:</b> Age validation via DOB check.</li>
+            <li class="mb-3">✅ <b>Anti-Double Voting:</b> Cryptographic ID mapping.</li>
+            <li class="mb-3">✅ <b>Real-time Audit:</b> Instant tampering detection.</li>
+        </ul>
+    </div>
+    <div class="col-md-7">
+        <div class="p-5 bg-dark rounded-5 shadow-lg text-white animate__animated animate__fadeInRight">
+            <h5 class="text-info mb-3 font-monospace">> system_check --integrity</h5>
+            <p class="font-monospace small mb-0">
+                [INFO] Initializing Blockchain Ledger... <br>
+                [INFO] SHA-256 Hashing Active. <br>
+                [INFO] Verifying Block #{{ blockchain_count|default:"1" }}... <br>
+                [SUCCESS] Chain Integrity Verified. 0 Tampering detected.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .bg-soft-primary { background-color: rgba(13, 110, 253, 0.1); }
+    .transition-up { transition: all 0.3s ease; }
+    .transition-up:hover { transform: translateY(-3px); }
+    .bento-card { border-radius: 24px; }
+    .icon-circle { 
+        width: 50px; height: 50px; border-radius: 15px; 
+        display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+    }
+    .floating-img { animation: float 6s ease-in-out infinite; }
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+    .blob-bg {
+        position: absolute; top: 50%; left: 50%;
+        width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(13, 110, 253, 0.2) 0%, rgba(255,255,255,0) 70%);
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+</style>
+{% endblock %}
