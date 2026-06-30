@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>மண்ணியல் பகுப்பாய்வு</title>
+</head>
+<body>
+    <h2>மண்ணியல் பகுப்பாய்வு</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="city">உங்கள் நகரம்:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">அறிக்கை பெற</button>
+    </form>
+
+    {% if analysis %}
+        <h3>மண்ணியல் பகுப்பாய்வு முடிவுகள்:</h3>
+        <p>📍 **இடம்:** {{ analysis.city }}</p>
+        <p>🌡️ **வெப்பநிலை:** {{ analysis.temperature }}°C</p>
+        <p>💧 **மண்ணின் ஈரப்பதம்:** {{ analysis.soil_moisture }}%</p>
+        <p>🌍 **நிலையின் நிலைமை:** {{ analysis.condition }}</p>
+    {% endif %}
+</body>
+</html>

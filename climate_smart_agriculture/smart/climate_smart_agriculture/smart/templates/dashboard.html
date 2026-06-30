@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard - Climate Smart Agriculture</title>
+    <style>
+        body { background-color: black; color: white; font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .container { max-width: 900px; margin: auto; }
+        h1 { color: #4CAF50; }
+        .btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; }
+        .btn:hover { background-color: #45a049; }
+        .dashboard-section { background-color: #222; padding: 15px; margin: 10px; border-radius: 8px; text-align: left; padding-left: 20px; }
+        .logout { margin-top: 20px; background-color: red; }
+        .logout:hover { background-color: darkred; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ request.session.user_name }}</h1>
+        <p>Manage your farming activities with smart insights and recommendations.</p>
+
+        <div class="dashboard-section">
+            <h2>🌦️ Weather Monitoring</h2>
+            <p>Temperature: 30°C | Humidity: 60%</p>
+            <a href="{% url 'weather_details' %}" class="btn">View Details</a>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>🌱 Soil Health Analysis</h2>
+            <p>Soil Type: Loamy | Moisture: 45%</p>
+            <a href="{% url 'soil_analysis' %}" class="btn">Check Soil Health</a>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>🚜 Smart Crop Recommendations</h2>
+            <p>Best Crops: Rice, Maize, Wheat</p>
+            <a href="{% url 'crop_recommendation' %}" class="btn">Get Personalized Recommendations</a>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>📊 Farming Analytics & Reports</h2>
+            <a href="{% url 'analytics_reports' %}" class="btn">View Reports</a>
+        </div>
+
+
+ 
+
+        <div class="dashboard-section">
+            <h2>📞 Agricultural Support & Consultation</h2>
+            <a href="{% url 'agri_support' %}" class="btn">Get Support</a>
+        </div>
+
+        <a href="{% url 'logout' %}" class="btn logout">Logout</a>
+    </div>
+</body>
+</html>

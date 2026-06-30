@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+        }
+        .section {
+            margin-top: 20px;
+        }
+        .section h2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f2f2f2;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+        .download-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analytics Report</h1>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% else %}
+            <div class="section">
+                <h2>Weather Data</h2>
+                <table class="data-table">
+                    <tr><th>City</th><td>{{ city }}</td></tr>
+                    <tr><th>Temperature</th><td>{{ temperature }} °C</td></tr>
+                    <tr><th>Humidity</th><td>{{ humidity }} %</td></tr>
+                    <tr><th>Pressure</th><td>{{ pressure }} hPa</td></tr>
+                    <tr><th>Description</th><td>{{ weather_description }}</td></tr>
+                    <tr><th>Wind Speed</th><td>{{ wind_speed }} m/s</td></tr>
+                </table>
+            </div>
+            <div class="section">
+                <h2>Crop Data</h2>
+                <table class="data-table">
+                    <tr><th>Recommended Crop</th><td>{{ crop_data.recommended_crop }}</td></tr>
+                    <tr><th>Sowing Season</th><td>{{ crop_data.sowing_season }}</td></tr>
+                    <tr><th>Harvest Time</th><td>{{ crop_data.harvest_time }}</td></tr>
+                    <tr><th>Yield</th><td>{{ crop_data.yield }} tons/ha</td></tr>
+                </table>
+            </div>
+            <div class="section">
+                <h2>Soil Data</h2>
+                <table class="data-table">
+                    <tr><th>pH Level</th><td>{{ soil_data.ph_level }}</td></tr>
+                    <tr><th>Nitrogen Content</th><td>{{ soil_data.nitrogen_content }} mg/kg</td></tr>
+                    <tr><th>Phosphorus Content</th><td>{{ soil_data.phosphorus_content }} mg/kg</td></tr>
+                    <tr><th>Potassium Content</th><td>{{ soil_data.potassium_content }} mg/kg</td></tr>
+                    <tr><th>Organic Matter</th><td>{{ soil_data.organic_matter }} %</td></tr>
+                </table>
+            </div>
+            <div class="download-link">
+                <a href="{% url 'download_excel' %}">Download Report as Excel</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

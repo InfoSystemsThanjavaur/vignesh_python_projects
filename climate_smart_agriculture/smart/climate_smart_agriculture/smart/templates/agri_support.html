@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>எங்கள் சேவைகள் - காலநிலை புத்திசாலி வேளாண்மை</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>எங்கள் சேவைகள்</h1>
+        <p>நாங்கள் வழங்கும் சேவைகள் மூலம் உங்கள் விவசாயத்தை புத்திசாலியாக மாற்றுங்கள்.</p>
+    </header>
+    <section class="services">
+        <div class="service-card">
+            <div class="icon-container">
+                <i class="fas fa-seedling"></i>
+            </div>
+            <h3>பயிர் ஆலோசனை</h3>
+            <p>உங்கள் நிலத்திற்கு பொருந்தும் பயிர்களைத் தேர்ந்தெடுப்பதில் நிபுணர் ஆலோசனையை பெறுங்கள்.</p>
+            <a href="{% url 'soil_analysis' %}" class="button">மேலும் அறிக</a>
+        </div>
+        <div class="service-card">
+            <div class="icon-container">
+                <i class="fas fa-cloud-sun-rain"></i>
+            </div>
+            <h3>வானிலை முன்னறிவிப்பு</h3>
+            <p>உங்கள் பகுதிக்கான துல்லியமான வானிலை தகவல்களை பெறுங்கள்.</p>
+            <a href="{% url 'weather_details' %}" class="button">மேலும் அறிக</a>
+        </div>
+    
+       
+    </section>
+    <section class="testimonials">
+        <h2>பயனர் கருத்துகள்</h2>
+        <div class="testimonial">
+            <p>"பயிர் ஆலோசனை சேவை மூலம் என் விளைச்சல் இரட்டிப்பாகியது!"</p>
+            <p>- ராஜேஷ், மதுரை</p>
+        </div>
+        <div class="testimonial">
+            <p>"நீர் மேலாண்மை ஆலோசனைகள் மிகவும் பயனுள்ளதாக இருந்தது."</p>
+            <p>- லதா, திருச்சி</p>
+        </div>
+    </section>
+    <section class="faq">
+        <h2>அடிக்கடி கேட்கப்படும் கேள்விகள்</h2>
+        <div class="question">
+            <h3>பயிர் ஆலோசனை சேவை எப்படி செயல்படுகிறது?</h3>
+            <p>நாங்கள் உங்கள் நிலத்தின் தன்மையை மதிப்பீடு செய்து, அதற்கு பொருந்தும் பயிர்களை பரிந்துரைக்கிறோம்.</p>
+        </div>
+        <div class="question">
+            <h3>சந்தை பகுப்பாய்வு சேவையை எப்படி அணுகுவது?</h3>
+            <p>எங்கள் இணையதளத்தில் பதிவு செய்து, உங்கள் கணக்கில் சந்தை பகுப்பாய்வு பிரிவை அணுகலாம்.</p>
+        </div>
+    </section>
+    <section class="contact-info">
+        <h2>தொடர்பு கொள்ள</h2>
+        <p>ஈமெயில்: info@agriservices.com</p>
+        <p>தொலைபேசி: +91 98765 43210</p>
+    </section>
+</body>
+<style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: #4CAF50;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.service-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    width: 250px;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+.icon-container {
+    background: #4CAF50;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+.button {
+    background: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background: #45a049;
+}
+
+.testimonials, .faq, .contact-info {
+    background: #fff;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+}
+
+.testimonial, .question {
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .services {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+</style>
+</html>

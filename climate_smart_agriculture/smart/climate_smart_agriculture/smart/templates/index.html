@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Smart Agriculture</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        p {
+            font-size: 18px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .modules {
+            margin-top: 30px;
+        }
+        .module {
+            background-color: #222;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Climate Smart Agriculture</h1>
+        <p>Empowering farmers with smart solutions for a sustainable future.</p>
+        <a href="/login" class="btn">Login</a>
+        <a href="/register" class="btn">Register</a>
+        
+        <div class="modules">
+            <h2>Main Modules</h2>
+            <div class="module">🌱 Farmer Dashboard</div>
+            <div class="module">☀️ Weather & Soil Data</div>
+            <div class="module">📊 Analytics & Reports</div>
+            <div class="module">💰 Market Price Trends</div>
+            <div class="module">🚜 Smart Crop Recommendations</div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- MySQL Database Setup -->
+
+-- Create database
+CREATE DATABASE ClimateSmartAgriculture;
+USE ClimateSmartAgriculture;
+
+-- Create farmer table
+CREATE TABLE farmers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    location VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Sample Insert
+INSERT INTO farmers (name, email, password, phone, location) 
+VALUES ('John Doe', 'john@example.com', 'hashed_password', '9876543210', 'Tamil Nadu');

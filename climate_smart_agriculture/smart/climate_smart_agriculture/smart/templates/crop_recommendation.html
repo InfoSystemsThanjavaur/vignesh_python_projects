@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>பயிர் பரிந்துரை</title>
+</head>
+<body>
+    <h2>பயிர் பரிந்துரை</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="soil_type">மண்ணின் வகை:</label>
+        <input type="text" id="soil_type" name="soil_type" required><br>
+
+        <label for="ph_value">pH மதிப்பு:</label>
+        <input type="number" step="0.1" id="ph_value" name="ph_value" required><br>
+
+        <label for="rainfall">மழைப்பொழிவு (mm):</label>
+        <input type="number" id="rainfall" name="rainfall" required><br>
+
+        <button type="submit">பயிர் பரிந்துரை பெற</button>
+    </form>
+
+    {% if crop %}
+        <h3>பரிந்துரைக்கப்படும் பயிர்: 🌾 {{ crop }}</h3>
+    {% endif %}
+</body>
+</html>

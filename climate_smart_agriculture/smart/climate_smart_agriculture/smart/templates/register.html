@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Climate Smart Agriculture</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form action="/register/" method="POST">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <input type="text" name="location" placeholder="Location" required>
+            <button type="submit" class="btn">Register</button>
+        </form>
+        <p>Already have an account? <a href="/login" style="color: #4CAF50;">Login here</a></p>
+    </div>
+</body>
+</html>
